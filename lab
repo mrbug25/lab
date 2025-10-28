@@ -1,0 +1,653 @@
+Example 1:
+
+Ques 1:
+CREATE TABLE student(
+roll INT PRIMARY KEY ,
+name VARCHAR(50),
+dept VARCHAR(50),
+year INT,
+semester INT
+);
+
+INSERT INTO student
+(roll, name, dept, year, semester) VALUES
+(06543201,'Rahim','BBA',2,1),
+(06543202,'Karim','ICE',2,1),
+(06543203,'Motin','CSE',1,2),
+(05654456,'Swadhin','CSE',1,2),
+(05654457,'Hena','BBA',4,2),
+(056544158,'Sohag','CSE',3,1);
+
+
+Ques 2:
+CREATE TABLE studentInfo(
+roll INT PRIMARY KEY ,
+name VARCHAR(50),
+Father_Name VARCHAR(50),
+Address VARCHAR(50),
+Mobile VARCHAR(50)
+);
+
+INSERT INTO studentInfo
+(roll, name,Father_Name,Address,Mobile) VALUES
+(6543201, 'Rahim', 'Ataur', 'Rajshahi', '01719201233'),
+(6543202, 'Karim', 'Tareq', 'Dhaka', '01719202020'),
+(6543203, 'Motin', 'Rahman', 'Khulna', '01719202678'),
+(5654456, 'Swadhin', 'Fazlu', 'Rajshahi', '01719204564'),
+(5654457, 'Hena', 'Rahman', 'Rajshahi', '01119212020'),
+(5654458, 'Sohag', 'Fazlul', 'Natore', '01719202222');
+
+3) SELECT name FROM student WHERE semester=1;
+SELECT name FROM student WHERE year=2;
+SELECT name FROM student WHERE dept='CSE';
+SELECT name FROM student WHERE roll=06543201;
+
+4)SELECT name,Address,Mobile FROM studentInfo WHERE Father_Name="Rahman";
+SELECT name,Address,Mobile FROM studentInfo WHERE Mobile='01719202020';
+SELECT name,Address,Mobile FROM studentInfo WHERE Address='Rajshahi';
+SELECT name,Address,Mobile FROM studentInfo WHERE Address='Rajshahi'AND Father_Name="Rahman";
+SELECT name,Address,Mobile FROM studentInfo WHERE roll=05654456;
+
+
+
+
+
+
+
+
+
+Example 2: 
+
+a)
+CREATE TABLE employee (
+employee_name VARCHAR(50) PRIMARY KEY,
+street VARCHAR(50),
+city VARCHAR(50)
+);
+
+INSERT INTO employee (employee_name, street, city) VALUES
+('Arif','51 upashahar','Rajshahi'),
+('Sumon','52 east','Moynamati'),
+('Sagor','Neemgachhi','Sirajgong'),
+('Abdul','Binodpur','Rajshahi'),
+('Himesh','Nazrul avenue','Dhaka'),
+('Amirul','Chawk bazar','Sylhet'),
+('Sajib','99 north','Chittagong');
+
+
+CREATE TABLE works (
+employee_name VARCHAR(50) PRIMARY KEY,
+company_name VARCHAR(50),
+salary INT
+
+);
+
+INSERT INTO works (employee_name,company_name,salary) VALUES
+('Sumon', 'Agrani', 12000),
+('Abdul', 'Sonali', 13000),
+('Himesh', 'Agrani', 6000),
+('Amirul', 'Sonali', 20000),
+('Sagor', 'Sonali', 8000),
+('Arif', 'Janata', 13000),
+('Sajib', 'Janata', 9000);
+
+
+SELECT employee_name FROM employee WHERE city = 'Rajshahi' ;
+
+SELECT employee_name,street FROM employee WHERE city = 'Rajshahi' ;
+
+SELECT employee_name FROM works WHERE company_name IN ('Sonali','Agrani','Janata');
+
+SELECT employee_name , salary FROM works WHERE company_name IN ('Sonali','Agrani','Janata');
+
+SELECT employee_name FROM works WHERE salary = 12000 OR salary >= 12000 OR salary < 12000;
+
+SELECT employee_name , company_name FROM works WHERE salary = 12000 OR salary >= 12000 OR salary < 12000;
+
+
+
+SELECT e.employee_name , e.street , e.city
+FROM employee e
+JOIN works w
+ON e.employee_name = w.employee_name
+WHERE company_name = 'Agrani' ;
+
+
+SELECT e.employee_name , e.street , e.city
+FROM employee e
+JOIN works w
+ON e.employee_name = w.employee_name
+WHERE salary >= 10000 ;
+
+SELECT e.employee_name , w.company_name , w.salary
+FROM employee e
+JOIN works w
+ON e.employee_name = w.employee_name
+WHERE city = 'Rajshahi' ;
+
+
+SELECT e.employee_name , e.street , e.city , w.company_name
+FROM employee e
+JOIN works w
+ON e.employee_name = w.employee_name
+WHERE salary >=10000 ;
+
+
+SELECT e.employee_name , e.street , e.city
+FROM employee e
+JOIN works w
+ON e.employee_name = w.employee_name
+WHERE company_name = 'Sonali' AND salary > 12000
+
+
+
+SELECT employee_name FROM works WHERE company_name <> 'Sonali'
+
+UPDATE employee SET city = 'Natore' WHERE employee_name = 'Arif' ;
+
+UPDATE works SET salary = salary * 1.1 WHERE company_name = 'Agrani' ;
+
+DELETE FROM employee WHERE employee_name = 'Sagor' ;
+
+ALTER TABLE works ADD COLUMN Manager VARCHAR(50) ;
+
+
+
+
+
+
+
+
+
+Example 3:
+
+CREATE TABLE Person (
+nid INT PRIMARY KEY,
+name VARCHAR(50),
+address VARCHAR(50)
+);
+INSERT INTO Person (nid, name, address) VALUES
+(123451, 'Arif', 'Rajshahi'),
+(123452, 'Sumon', 'Moynamati'),
+(123453, 'Sagor', 'Sirajgang'),
+(123454, 'Abdul', 'Rajshahi'),
+(123455, 'Himesh', 'Dhaka'),
+(123456, 'Amirul', 'Sylhet'),
+(123457, 'Sajib', 'Chittagang');
+
+CREATE TABLE Car (
+license VARCHAR(20) PRIMARY KEY,
+year INT,
+model VARCHAR(50)
+);
+
+INSERT INTO car (license, year, model) VALUES
+('12-3000', 2012, 'Axio'),
+('11-3000', 2008, 'Corolla'),
+('12-4000', 2013, 'Axio'),
+('12-5000', 2013, 'Premio'),
+('11-5000', 2010, 'Nano'),
+('11-6000', 2011, 'Alto'),
+('12-6000', 2015, 'Nano Twist');
+
+CREATE TABLE accident (
+date DATE ,
+driver VARCHAR(50) ,
+damage_amount INT,
+
+PRIMARY KEY (date,driver)
+);
+
+
+INSERT INTO accident (date, driver, damage_amount) VALUES
+('2013-01-12','Arif',10000),
+('2015-09-25','Komol',12000),
+('2014-06-20','Bahadur',11000),
+('2011-12-20','Abdul',8000),
+('2015-09-19','Akter',7000),
+('2013-05-15','Arif',20000),
+('2014-08-20','Arif',15000);
+
+CREATE TABLE owns (
+Nid INT,
+license VARCHAR(20),
+PRIMARY KEY(Nid, license)
+);
+
+
+INSERT INTO owns (Nid, license) VALUES
+(123451,'11-3000'),
+(123452,'12-4000'),
+(123453,'12-5000'),
+(123454,'11-5000'),
+(123455,'11-6000'),
+(123456,'12-6000'),
+(123457,'12-3000');
+
+
+CREATE TABLE log (
+license VARCHAR(20),
+date DATE,
+driver VARCHAR(50),
+PRIMARY KEY(license, DATE, driver)
+);
+
+INSERT INTO log (license, date, driver) VALUES
+('11-3000','2023-01-12','Arif'),
+('12-4000','2015-09-25','Komol'),
+('11-6000','2014-06-20','Bahadur'),
+('11-5000','2011-12-20','Abdul'),
+('12-6000','2015-09-19','Akter'),
+('11-3000','2013-05-15','Arif'),
+('11-3000','2014-08-20','Arif');
+
+
+
+
+SELECT name FROM Person WHERE address = 'Rajshahi' ;
+
+SELECT model FROM Car WHERE YEAR = 2013 ;
+
+SELECT driver FROM accident WHERE
+damage_amount BETWEEN 10000 AND 15000 ;
+
+
+SELECT p.name , p.address
+FROM person p
+JOIN owns o ON p.nid = o.Nid
+JOIN car c ON o.license = c.license
+WHERE model = 'Alto'    (**Important)
+
+
+SELECT driver FROM accident WHERE DATE = '2011-12-20'
+
+SELECT DISTINCT p.name
+FROM person p
+JOIN owns o
+ON o.nid = p.nid
+JOIN log l
+ON o.license = l.license
+WHERE driver ='Arif';
+
+
+SELECT COUNT(*) AS total
+FROM log l
+JOIN owns o
+ON l.license = o.license
+JOIN person p
+ON o.Nid = p.nid
+WHERE driver = 'Arif'
+
+
+SELECT l.date
+FROM log l
+JOIN owns o ON l.license=o.license
+JOIN person p ON o.nid=p.nid
+WHERE p.name='Arif';
+
+UPDATE person SET address = 'Nato' WHERE name = 'Arif'
+
+
+
+
+Example 5: 
+
+-- ==========================================
+-- 1️⃣ CREATE DATABASE
+-- ==========================================
+CREATE DATABASE LibraryDB;
+USE LibraryDB;
+
+-- ==========================================
+-- 2️⃣ CREATE TABLES
+-- ==========================================
+
+CREATE TABLE PUBLISHER (
+    Name VARCHAR(50) PRIMARY KEY,
+    Address VARCHAR(100),
+    Phone VARCHAR(20)
+);
+
+CREATE TABLE BOOK (
+    BookId VARCHAR(20) PRIMARY KEY,
+    Title VARCHAR(100),
+    PublisherName VARCHAR(50),
+    FOREIGN KEY (PublisherName) REFERENCES PUBLISHER(Name)
+);
+
+CREATE TABLE BOOK_AUTHORS (
+    BookId VARCHAR(20),
+    AuthorName VARCHAR(50),
+    FOREIGN KEY (BookId) REFERENCES BOOK(BookId)
+);
+
+CREATE TABLE LIBRARY_BRANCH (
+    BranchId VARCHAR(20) PRIMARY KEY,
+    BranchName VARCHAR(100),
+    Address VARCHAR(100)
+);
+
+CREATE TABLE BOOK_COPIES (
+    BookId VARCHAR(20),
+    BranchId VARCHAR(20),
+    No_Of_Copies INT,
+    FOREIGN KEY (BookId) REFERENCES BOOK(BookId),
+    FOREIGN KEY (BranchId) REFERENCES LIBRARY_BRANCH(BranchId)
+);
+
+CREATE TABLE BORROWER (
+    CardNo VARCHAR(20) PRIMARY KEY,
+    Name VARCHAR(50),
+    Address VARCHAR(100),
+    Phone VARCHAR(20)
+);
+
+CREATE TABLE BOOK_LOAN (
+    BookId VARCHAR(20),
+    BranchId VARCHAR(20),
+    CardNo VARCHAR(20),
+    DateOut DATE,
+    DueDate DATE,
+    FOREIGN KEY (BookId) REFERENCES BOOK(BookId),
+    FOREIGN KEY (BranchId) REFERENCES LIBRARY_BRANCH(BranchId),
+    FOREIGN KEY (CardNo) REFERENCES BORROWER(CardNo)
+);
+
+-- ==========================================
+-- 3️⃣ INSERT SAMPLE DATA
+-- ==========================================
+
+-- PUBLISHER
+INSERT INTO PUBLISHER VALUES
+('PHI', '20 Delhi Super Market', '01715-454678'),
+('Tata', 'North Kolkata', '0156-2345445'),
+('Galgotia', 'Mumbai', '0192-203490');
+
+-- BOOK
+INSERT INTO BOOK VALUES
+('100.001cn', 'Computer Network', 'PHI'),
+('100.002dsc', 'Database System', 'Tata'),
+('100.003ds', 'Digital System', 'PHI'),
+('100.004db', 'DBMS', 'PHI'),
+('100.005ora', 'Oracle 2000', 'Galgotia');
+
+-- BOOK AUTHORS
+INSERT INTO BOOK_AUTHORS VALUES
+('100.001cn', 'A S Tanenbaum'),
+('100.002dsc', 'Silberschatz'),
+('100.003ds', 'Ronald J Tocci'),
+('100.004db', 'Ivan BayRoss'),
+('100.005ora', 'Ivan BayRoss');
+
+-- LIBRARY BRANCH
+INSERT INTO LIBRARY_BRANCH VALUES
+('1001', 'CSE Seminar Library', 'Rajshahi'),
+('1002', 'RU Central Library', 'Rajshahi'),
+('1003', 'DU Central Library', 'Dhaka');
+
+-- BOOK COPIES
+INSERT INTO BOOK_COPIES VALUES
+('100.001cn', '1001', 2),
+('100.001cn', '1002', 5),
+('100.002dsc', '1001', 3),
+('100.002dsc', '1002', 4),
+('100.003ds', '1001', 3),
+('100.003ds', '1003', 5),
+('100.004db', '1001', 2),
+('100.004db', '1002', 5),
+('100.005ora', '1001', 2),
+('100.005ora', '1002', 7);
+
+-- BORROWER
+INSERT INTO BORROWER VALUES
+('10001', 'Saidur', 'CSE', '01714-400567'),
+('10002', 'Rafiq', 'PHYSICS', '0194-300456'),
+('10003', 'Masud', 'CSE', '0156-345678'),
+('10004', 'Nobir', 'ICT', '01199-203456');
+
+-- BOOK LOAN
+INSERT INTO BOOK_LOAN VALUES
+('100.001cn', '1001', '10001', '2015-01-15', '2015-02-15'),
+('100.001cn', '1002', '10002', '2015-01-25', '2015-02-25'),
+('100.002dsc', '1001', '10003', '2015-02-20', '2015-03-20'),
+('100.002dsc', '1002', '10004', '2015-03-15', '2015-04-15'),
+('100.003ds', '1001', '10001', '2015-06-07', '2015-07-07'),
+('100.003ds', '1003', '10002', '2015-10-15', '2015-11-15'),
+('100.004db', '1001', '10003', '2015-10-25', '2015-11-25'),
+('100.004db', '1002', '10004', '2015-11-15', '2015-12-15'),
+('100.005ora', '1001', '10003', '2015-12-22', '2015-12-22'),
+('100.005ora', '1002', '10001', '2015-12-25', '2016-01-25');
+
+-- ==========================================
+-- 4️⃣ SQL QUERIES
+-- ==========================================
+
+-- Q1: How many copies of "DBMS" are owned by "CSE Seminar Library"?
+SELECT bc.No_Of_Copies
+FROM BOOK b
+JOIN BOOK_COPIES bc ON b.BookId = bc.BookId
+JOIN LIBRARY_BRANCH lb ON bc.BranchId = lb.BranchId
+WHERE b.Title = 'DBMS' AND lb.BranchName = 'CSE Seminar Library';
+
+-- Q2: How many copies of "DBMS" are owned by each library branch?
+SELECT lb.BranchName, bc.No_Of_Copies
+FROM BOOK b
+JOIN BOOK_COPIES bc ON b.BookId = bc.BookId
+JOIN LIBRARY_BRANCH lb ON bc.BranchId = lb.BranchId
+WHERE b.Title = 'DBMS';
+
+-- Q3: Retrieve names of borrowers who do not have any books checked out.
+SELECT br.Name
+FROM BORROWER br
+WHERE br.CardNo NOT IN (SELECT CardNo FROM BOOK_LOAN);
+
+-- Q4: Retrieve books loaned from "CSE Seminar Library" due today.
+SELECT b.Title, br.Name, br.Address
+FROM BOOK b
+JOIN BOOK_LOAN bl ON b.BookId = bl.BookId
+JOIN BORROWER br ON bl.CardNo = br.CardNo
+JOIN LIBRARY_BRANCH lb ON bl.BranchId = lb.BranchId
+WHERE lb.BranchName = 'CSE Seminar Library'
+  AND bl.DueDate = CURDATE();
+
+-- Q5: Retrieve each branch name and total number of books loaned out.
+SELECT lb.BranchName, COUNT(bl.BookId) AS Total_Loaned
+FROM BOOK_LOAN bl
+JOIN LIBRARY_BRANCH lb ON bl.BranchId = lb.BranchId
+GROUP BY lb.BranchName;
+
+-- Q6: Retrieve borrowers who have more than two books checked out.
+SELECT br.Name, br.Address, COUNT(bl.BookId) AS Books_Checked_Out
+FROM BORROWER br
+JOIN BOOK_LOAN bl ON br.CardNo = bl.CardNo
+GROUP BY br.Name, br.Address
+HAVING COUNT(bl.BookId) > 2;
+
+-- Q7: Retrieve books authored by "Ivan BayRoss" in "RU Central Library".
+SELECT b.Title, bc.No_Of_Copies
+FROM BOOK b
+JOIN BOOK_AUTHORS ba ON b.BookId = ba.BookId
+JOIN BOOK_COPIES bc ON b.BookId = bc.BookId
+JOIN LIBRARY_BRANCH lb ON bc.BranchId = lb.BranchId
+WHERE ba.AuthorName = 'Ivan BayRoss'
+  AND lb.BranchName = 'RU Central Library';
+
+
+
+
+
+example 5 :
+
+-- =========================================
+-- 1️⃣ Create Tables
+-- =========================================
+
+CREATE TABLE employee (
+    employee_name VARCHAR(50) PRIMARY KEY,
+    street VARCHAR(50),
+    city VARCHAR(50)
+);
+
+CREATE TABLE company (
+    company_name VARCHAR(50) PRIMARY KEY,
+    city VARCHAR(50)
+);
+
+CREATE TABLE works (
+    employee_name VARCHAR(50),
+    company_name VARCHAR(50),
+    salary INT,
+    PRIMARY KEY (employee_name, company_name),
+    FOREIGN KEY (employee_name) REFERENCES employee(employee_name),
+    FOREIGN KEY (company_name) REFERENCES company(company_name)
+);
+
+CREATE TABLE manages (
+    employee_name VARCHAR(50),
+    manager_name VARCHAR(50),
+    FOREIGN KEY (employee_name) REFERENCES employee(employee_name),
+    FOREIGN KEY (manager_name) REFERENCES employee(employee_name)
+);
+
+-- =========================================
+-- 2️⃣ Insert Data
+-- =========================================
+
+INSERT INTO employee VALUES 
+('Arif', '51 upashahar', 'Rajshahi'),
+('Sumon', '52 east', 'Moynamati'),
+('Sagor', 'Neemgachhi', 'Sirajgong'),
+('Abdul', 'Binodpur', 'Rajshahi'),
+('Himesh', 'Nazrul avenue', 'Dhaka'),
+('Amirul', 'Chawk bazar', 'Sylhet'),
+('Sajib', '99 north', 'Chittagong');
+
+INSERT INTO company VALUES 
+('Agrani', 'Rajshahi'),
+('Sonali', 'Sylhet'),
+('Janata', 'Dhaka');
+
+INSERT INTO works VALUES 
+('Sumon', 'Agrani', 12000),
+('Abdul', 'Sonali', 13000),
+('Himesh', 'Agrani', 6000),
+('Amirul', 'Sonali', 20000),
+('Sagor', 'Sonali', 8000),
+('Arif', 'Janata', 13000),
+('Sajib', 'Janata', 9000);
+
+INSERT INTO manages VALUES 
+('Amirul', 'Amirul'),
+('Abdul', 'Amirul'),
+('Sagor', 'Amirul'),
+('Sumon', 'Sumon'),
+('Himesh', 'Sumon'),
+('Arif', 'Arif'),
+('Sajib', 'Arif');
+
+-- =========================================
+-- 3️⃣ Queries
+-- =========================================
+
+-- (b) যারা “Sonali” তে কাজ করে
+SELECT employee_name FROM works WHERE company_name = 'Sonali';
+
+-- (c) “Agrani” তে কাজ করা employee-দের নাম, street, city
+SELECT e.employee_name, e.street, e.city
+FROM employee e
+JOIN works w ON e.employee_name = w.employee_name
+WHERE w.company_name = 'Agrani';
+
+-- (d) “Sonali” তে কাজ করে এবং salary > 10000
+SELECT e.employee_name, e.street, e.city
+FROM employee e
+JOIN works w ON e.employee_name = w.employee_name
+WHERE w.company_name = 'Sonali' AND w.salary > 10000;
+
+-- (e) যারা company-র শহরেই থাকে
+SELECT e.employee_name
+FROM employee e
+JOIN works w ON e.employee_name = w.employee_name
+JOIN company c ON w.company_name = c.company_name
+WHERE e.city = c.city;
+
+-- (f) যারা manager-এর সাথে একই street & city-তে থাকে
+SELECT e.employee_name
+FROM employee e
+JOIN manages m ON e.employee_name = m.employee_name
+JOIN employee mgr ON m.manager_name = mgr.employee_name
+WHERE e.city = mgr.city AND e.street = mgr.street;
+
+-- (g) যারা “Sonali” তে কাজ করে না
+SELECT employee_name FROM works WHERE company_name <> 'Sonali';
+
+-- (h) যারা “Janata” Bank-এর প্রতিটি employee থেকে বেশি আয় করে
+SELECT employee_name 
+FROM works 
+WHERE salary > ALL (SELECT salary FROM works WHERE company_name = 'Janata');
+
+-- (i) যারা তাদের কোম্পানির গড় salary-এর চেয়ে বেশি আয় করে
+SELECT w.employee_name 
+FROM works w
+WHERE w.salary > (
+    SELECT AVG(w2.salary) 
+    FROM works w2 
+    WHERE w2.company_name = w.company_name
+);
+
+-- (j) সবচেয়ে বেশি employee-যুক্ত company
+SELECT company_name 
+FROM works 
+GROUP BY company_name 
+ORDER BY COUNT(*) DESC 
+LIMIT 1;
+
+-- (k) সবচেয়ে ছোট payroll
+SELECT company_name 
+FROM works 
+GROUP BY company_name 
+ORDER BY SUM(salary) ASC 
+LIMIT 1;
+
+-- (l) যেসব company-এর avg salary “Agrani”-র avg salary-এর চেয়ে বেশি
+SELECT company_name 
+FROM works 
+GROUP BY company_name 
+HAVING AVG(salary) > (
+    SELECT AVG(salary) 
+    FROM works 
+    WHERE company_name = 'Agrani'
+);
+
+-- (m) “Arif” এখন Natore-এ থাকে
+UPDATE employee SET city = 'Natore' WHERE employee_name = 'Arif';
+
+-- (n) “Agrani” Bank-এর সব employee 10% raise
+UPDATE works SET salary = salary * 1.10 WHERE company_name = 'Agrani';
+
+-- (o) “Agrani” Bank-এর সব manager 10% raise
+UPDATE works 
+SET salary = salary * 1.10 
+WHERE employee_name IN (SELECT manager_name FROM manages) 
+AND company_name = 'Agrani';
+
+-- (p) সব manager 10% raise, কিন্তু 19000-এর বেশি হলে 3% raise
+UPDATE works 
+SET salary = CASE 
+                WHEN salary * 1.10 > 19000 THEN salary * 1.03 
+                ELSE salary * 1.10 
+             END 
+WHERE employee_name IN (SELECT manager_name FROM manages);
+
+-- (q) “Janata” Bank-এর সব works delete
+DELETE FROM works WHERE company_name = 'Janata';
+
+-- (r) Manager-wise average salary view
+CREATE OR REPLACE VIEW manager_avg_salary AS
+SELECT m.manager_name, AVG(w.salary) AS avg_salary
+FROM manages m
+JOIN works w ON m.employee_name = w.employee_name
+GROUP BY m.manager_name;
+
+-- View output দেখা
+SELECT * FROM manager_avg_salary;
